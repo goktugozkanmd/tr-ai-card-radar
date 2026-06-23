@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/tr-ai-card-radar/resources.schema.json",
+  "title": "tr-ai-card-radar resource list",
+  "type": "object",
+  "required": ["resources"],
+  "properties": {
+    "checked_basis_date": {
+      "type": "string"
+    },
+    "note": {
+      "type": "string"
+    },
+    "resources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["repo_id", "repo_type", "source_url", "reason"],
+        "properties": {
+          "repo_id": {
+            "type": "string",
+            "pattern": "^[^/]+/[^/]+$"
+          },
+          "repo_type": {
+            "type": "string",
+            "enum": ["model", "dataset"]
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 10
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

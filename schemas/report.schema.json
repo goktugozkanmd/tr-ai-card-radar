@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/tr-ai-card-radar/report.schema.json",
+  "title": "tr-ai-card-radar report",
+  "type": "object",
+  "required": ["tool", "tool_version", "checked_at", "repo", "summary", "warnings"],
+  "properties": {
+    "tool": {
+      "const": "tr-ai-card-radar"
+    },
+    "tool_version": {
+      "type": "string"
+    },
+    "checked_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "repo": {
+      "type": "object",
+      "required": ["repo_id", "repo_type", "gated", "private", "tags", "card_data"],
+      "properties": {
+        "repo_id": {
+          "type": "string"
+        },
+        "repo_type": {
+          "type": "string",
+          "enum": ["model", "dataset"]
+        },
+        "source_url": {
+          "type": ["string", "null"]
+        },
+        "gated": {
+          "type": ["boolean", "string", "null"]
+        },
+        "private": {
+          "type": ["boolean", "null"]
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "card_data": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": true
+    },
+    "summary": {
+      "type": "object",
+      "required": ["blockers", "warnings", "infos"],
+      "properties": {
+        "blockers": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "warnings": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "infos": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["check_id", "severity", "message", "evidence"],
+        "properties": {
+          "check_id": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["blocker", "warning", "info"]
+          },
+          "message": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

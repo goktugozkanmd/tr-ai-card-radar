@@ -1,0 +1,29 @@
+checked_basis_date: "2026 06 23"
+note: >
+  Initial public metadata audit targets from A56. Repo name availability,
+  package availability, and current metadata must be rechecked before release.
+resources:
+  - repo_id: alibayram/turkish_mmlu
+    repo_type: dataset
+    source_url: https://huggingface.co/datasets/alibayram/turkish_mmlu
+    reason: Turkish MMLU style dataset with license and provenance review value.
+  - repo_id: AYueksel/TurkishMMLU
+    repo_type: dataset
+    source_url: https://huggingface.co/datasets/AYueksel/TurkishMMLU
+    reason: Turkish multiple choice QA dataset with public card and access request boundary.
+  - repo_id: emre/TARA_Turkish_LLM_Benchmark
+    repo_type: dataset
+    source_url: https://huggingface.co/datasets/emre/TARA_Turkish_LLM_Benchmark
+    reason: Synthetic Turkish benchmark card with transparency and limitation review value.
+  - repo_id: Trendyol/Trendyol-LLM-7b-chat-v1.0
+    repo_type: model
+    source_url: https://huggingface.co/Trendyol/Trendyol-LLM-7b-chat-v1.0
+    reason: Turkish public model card and metadata audit target.
+  - repo_id: Trendyol/Trendyol-LLM-8B-T1
+    repo_type: model
+    source_url: https://huggingface.co/Trendyol/Trendyol-LLM-8B-T1
+    reason: Turkish and English reasoning model card and metadata audit target.
+  - repo_id: WiroAI/wiroai-turkish-llm-9b
+    repo_type: model
+    source_url: https://huggingface.co/WiroAI/wiroai-turkish-llm-9b
+    reason: Turkish model card where base model and license boundary need careful reporting.

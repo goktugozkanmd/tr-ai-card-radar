@@ -1,0 +1,61 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tr-ai-card-radar"
+version = "0.1.0"
+description = "A small CLI for auditing Turkish AI Hugging Face card metadata and reuse warning signals."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+  { name = "Goktug Ozkan" }
+]
+keywords = [
+  "huggingface",
+  "model-card",
+  "dataset-card",
+  "turkish",
+  "metadata",
+  "ai-evaluation"
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Software Development :: Quality Assurance"
+]
+dependencies = [
+  "huggingface-hub>=0.23",
+  "PyYAML>=6.0"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.5"
+]
+
+[project.scripts]
+tr-card-radar = "tr_ai_card_radar.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/REPLACE_WITH_USERNAME/tr-ai-card-radar"
+Issues = "https://github.com/REPLACE_WITH_USERNAME/tr-ai-card-radar/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/tr_ai_card_radar"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
