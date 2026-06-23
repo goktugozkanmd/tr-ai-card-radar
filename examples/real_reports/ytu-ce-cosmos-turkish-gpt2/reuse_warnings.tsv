@@ -1,0 +1,4 @@
+repo_id	repo_type	severity	check_id	message
+ytu-ce-cosmos/turkish-gpt2	model	warning	missing_base_model	No base model metadata was found.
+ytu-ce-cosmos/turkish-gpt2	model	warning	missing_limitations	Model card text does not clearly mention limitations.
+ytu-ce-cosmos/turkish-gpt2	model	info	not_legal_advice	This report is a metadata warning aid and does not provide legal advice.

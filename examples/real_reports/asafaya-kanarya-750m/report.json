@@ -1,0 +1,71 @@
+{
+  "tool": "tr-ai-card-radar",
+  "tool_version": "0.1.0",
+  "checked_at": "2026-06-23T12:31:48.858848Z",
+  "repo": {
+    "repo_id": "asafaya/kanarya-750m",
+    "repo_type": "model",
+    "source_url": null,
+    "gated": false,
+    "private": false,
+    "sha": "b27eef7948d4570e536ef0fa01b1c141fcd77f5a",
+    "tags": [
+      "transformers",
+      "pytorch",
+      "jax",
+      "safetensors",
+      "gptj",
+      "text-generation",
+      "tr",
+      "dataset:oscar",
+      "dataset:mc4",
+      "license:apache-2.0",
+      "endpoints_compatible",
+      "region:us"
+    ],
+    "card_data": {
+      "datasets": [
+        "oscar",
+        "mc4"
+      ],
+      "language": [
+        "tr"
+      ],
+      "license": "apache-2.0",
+      "pipeline_tag": "text-generation",
+      "widget": [
+        {
+          "text": "Benim adım Zeynep, ve en sevdiğim kitabın adı:",
+          "example_title": "Benim adım Zeynep"
+        },
+        {
+          "text": "Bugünkü yemeğimiz",
+          "example_title": "Bugünkü yemeğimiz"
+        }
+      ]
+    },
+    "siblings_count": 12
+  },
+  "summary": {
+    "blockers": 0,
+    "warnings": 1,
+    "infos": 1
+  },
+  "warnings": [
+    {
+      "check_id": "missing_base_model",
+      "severity": "warning",
+      "message": "No base model metadata was found.",
+      "evidence": {
+        "base_model": null,
+        "base_model_tags": []
+      }
+    },
+    {
+      "check_id": "not_legal_advice",
+      "severity": "info",
+      "message": "This report is a metadata warning aid and does not provide legal advice.",
+      "evidence": {}
+    }
+  ]
+}

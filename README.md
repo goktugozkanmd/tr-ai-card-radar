@@ -139,3 +139,13 @@ Review the generated warnings before publishing anything.
 ## Maintainer note
 
 This repository is intended to make Turkish AI metadata easier to inspect. It should stay small, reproducible, and careful with claims.
+
+## Example audits on real Turkish AI resources
+
+Real, reproducible audit outputs are included under `examples/real_reports/` for three verified public Turkish Hugging Face models:
+
+- `Trendyol/Trendyol-LLM-7b-chat-v1.0`
+- `ytu-ce-cosmos/turkish-gpt2`
+- `asafaya/kanarya-750m`
+
+Each folder contains `report.json`, `report.md`, `reuse_warnings.tsv`, and the captured command output. See `docs/REAL_DEMO.md` for the run commands and Hugging Face source verification (verified repo SHAs). These are metadata-audit examples only — no model ranking, no clinical or legal claims.

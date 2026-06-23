@@ -1,0 +1,6 @@
+COMMAND: tr-card-radar audit asafaya/kanarya-750m --repo-type model --out-dir examples/real_reports/asafaya-kanarya-750m
+START_UTC: 2026-06-23T12:31:47Z
+/private/tmp/tcr-demo/.venv/lib/python3.14/site-packages/huggingface_hub/utils/_validators.py:205: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.
+  warnings.warn(
+EXIT_STATUS: 0
+END_UTC: 2026-06-23T12:31:48Z

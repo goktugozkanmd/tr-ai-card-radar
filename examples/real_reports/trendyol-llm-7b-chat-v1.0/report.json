@@ -1,0 +1,52 @@
+{
+  "tool": "tr-ai-card-radar",
+  "tool_version": "0.1.0",
+  "checked_at": "2026-06-23T12:31:46.282504Z",
+  "repo": {
+    "repo_id": "Trendyol/Trendyol-LLM-7b-chat-v1.0",
+    "repo_type": "model",
+    "source_url": null,
+    "gated": false,
+    "private": false,
+    "sha": "3bf47571cef21bcaadbbcef8ca65307f3ad46614",
+    "tags": [
+      "transformers",
+      "safetensors",
+      "mistral",
+      "text-generation",
+      "conversational",
+      "tr",
+      "en",
+      "base_model:Trendyol/Trendyol-LLM-7b-base-v1.0",
+      "base_model:finetune:Trendyol/Trendyol-LLM-7b-base-v1.0",
+      "license:apache-2.0",
+      "text-generation-inference",
+      "endpoints_compatible",
+      "deploy:azure",
+      "region:us"
+    ],
+    "card_data": {
+      "base_model": "Trendyol/Trendyol-LLM-7b-base-v1.0",
+      "language": [
+        "tr",
+        "en"
+      ],
+      "license": "apache-2.0",
+      "pipeline_tag": "text-generation"
+    },
+    "siblings_count": 12
+  },
+  "summary": {
+    "blockers": 0,
+    "warnings": 0,
+    "infos": 1
+  },
+  "warnings": [
+    {
+      "check_id": "not_legal_advice",
+      "severity": "info",
+      "message": "This report is a metadata warning aid and does not provide legal advice.",
+      "evidence": {}
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "tool": "tr-ai-card-radar",
+  "tool_version": "0.1.0",
+  "checked_at": "2026-06-23T12:31:47.633132Z",
+  "repo": {
+    "repo_id": "ytu-ce-cosmos/turkish-gpt2",
+    "repo_type": "model",
+    "source_url": null,
+    "gated": false,
+    "private": false,
+    "sha": "683453f58f3615e597c2608c710b82ed96b74f90",
+    "tags": [
+      "transformers",
+      "pytorch",
+      "tf",
+      "safetensors",
+      "gpt2",
+      "text-generation",
+      "Turkish",
+      "turkish",
+      "tr",
+      "dataset:uonlp/CulturaX",
+      "arxiv:2404.17336",
+      "license:mit",
+      "text-generation-inference",
+      "endpoints_compatible",
+      "deploy:azure",
+      "region:us"
+    ],
+    "card_data": {
+      "datasets": [
+        "uonlp/CulturaX"
+      ],
+      "language": [
+        "tr"
+      ],
+      "license": "mit",
+      "pipeline_tag": "text-generation",
+      "tags": [
+        "Turkish",
+        "turkish",
+        "gpt2"
+      ]
+    },
+    "siblings_count": 12
+  },
+  "summary": {
+    "blockers": 0,
+    "warnings": 2,
+    "infos": 1
+  },
+  "warnings": [
+    {
+      "check_id": "missing_base_model",
+      "severity": "warning",
+      "message": "No base model metadata was found.",
+      "evidence": {
+        "base_model": null,
+        "base_model_tags": []
+      }
+    },
+    {
+      "check_id": "missing_limitations",
+      "severity": "warning",
+      "message": "Model card text does not clearly mention limitations.",
+      "evidence": {
+        "keywords_checked": [
+          "limitations",
+          "limitation",
+          "sinirlar",
+          "sınırlamalar",
+          "limits"
+        ]
+      }
+    },
+    {
+      "check_id": "not_legal_advice",
+      "severity": "info",
+      "message": "This report is a metadata warning aid and does not provide legal advice.",
+      "evidence": {}
+    }
+  ]
+}

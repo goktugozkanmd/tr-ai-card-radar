@@ -1,0 +1,3 @@
+repo_id	repo_type	severity	check_id	message
+asafaya/kanarya-750m	model	warning	missing_base_model	No base model metadata was found.
+asafaya/kanarya-750m	model	info	not_legal_advice	This report is a metadata warning aid and does not provide legal advice.

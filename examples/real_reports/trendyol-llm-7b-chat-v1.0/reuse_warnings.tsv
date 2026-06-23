@@ -1,0 +1,2 @@
+repo_id	repo_type	severity	check_id	message
+Trendyol/Trendyol-LLM-7b-chat-v1.0	model	info	not_legal_advice	This report is a metadata warning aid and does not provide legal advice.
