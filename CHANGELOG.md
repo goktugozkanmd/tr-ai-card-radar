@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Fixed license prose scan matching short license ids as substrings, which hid the missing-license blocker on cards that merely contained words such as "submit" or "permit".
+
 ## 0.1.0
 
 - Initial CLI skeleton.

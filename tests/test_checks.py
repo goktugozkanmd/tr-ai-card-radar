@@ -58,3 +58,20 @@ def test_model_missing_base_model_is_warning() -> None:
     warnings = run_checks(snapshot)
 
     assert any(item.check_id == "missing_base_model" and item.severity == "warning" for item in warnings)
+
+
+def test_licenseless_card_with_incidental_mit_word_is_still_blocker() -> None:
+    snapshot = HfRepoSnapshot(
+        repo_id="local/mock-model",
+        repo_type="model",
+        tags=["language:tr"],
+        card_data={"language": ["tr"]},
+        card_text=(
+            "# Mock\n\n## Intended Use\n\nResearch only; do not submit outputs for diagnosis.\n"
+            "A permit is required for any clinical use.\n\n## Limitations\n\nNot validated."
+        ),
+    )
+
+    warnings = run_checks(snapshot)
+
+    assert any(item.check_id == "missing_license" and item.severity == "blocker" for item in warnings)

@@ -241,9 +241,19 @@ def _prose_license_mentions(text: str) -> set[str]:
     low = _lower_ascii(text)
     found: set[str] = set()
     for pattern in LICENSE_PATTERNS:
-        if pattern in low:
+        if _matches_license_token(low, pattern):
             found.add(pattern)
     return found
+
+
+def _matches_license_token(text: str, pattern: str) -> bool:
+    """Match a license pattern as a whole token, not as a substring.
+
+    Short patterns such as ``mit`` otherwise match ordinary words ("submit",
+    "permit", "transmit") and suppress the missing-license blocker.
+    """
+    regex = r"(?<![a-z0-9])" + re.escape(pattern) + r"(?![a-z0-9])"
+    return re.search(regex, text) is not None
 
 
 def _normalize_license(value: str) -> str:
