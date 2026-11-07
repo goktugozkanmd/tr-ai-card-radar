@@ -66,11 +66,11 @@ def _license_checks(snapshot: HfRepoSnapshot) -> list[WarningItem]:
     if not metadata_licenses and not prose_mentions:
         warnings.append(
             WarningItem(
-                check_id="missing_license",
+                check_id="LICENSE_MISSING",
                 severity="blocker",
                 message="No license was found in Hub metadata, card metadata, or simple card prose scan.",
                 evidence={
-                    "metadata_license": metadata_licenses,
+                    "metadata_license": sorted(metadata_licenses),
                     "prose_license_mentions": sorted(prose_mentions),
                 },
             )
@@ -83,7 +83,7 @@ def _license_checks(snapshot: HfRepoSnapshot) -> list[WarningItem]:
         if normalized_metadata.isdisjoint(normalized_prose):
             warnings.append(
                 WarningItem(
-                    check_id="license_metadata_prose_mismatch",
+                    check_id="LICENSE_PROSE_MISMATCH",
                     severity="warning",
                     message=(
                         "License string in metadata does not match simple license mentions "
@@ -107,7 +107,7 @@ def _language_checks(snapshot: HfRepoSnapshot) -> list[WarningItem]:
     if not languages and not tag_languages and not turkish_tags:
         return [
             WarningItem(
-                check_id="missing_language",
+                check_id="LANGUAGE_MISSING",
                 severity="warning",
                 message="No language metadata was found in card data or repository tags.",
                 evidence={"card_language": languages, "language_tags": tag_languages},
@@ -120,7 +120,7 @@ def _access_checks(snapshot: HfRepoSnapshot) -> list[WarningItem]:
     if snapshot.gated in (True, "auto", "manual"):
         return [
             WarningItem(
-                check_id="gated_access_review_needed",
+                check_id="ACCESS_GATED",
                 severity="warning",
                 message=(
                     "Repository appears to be gated. The tool must not download protected rows "
@@ -137,7 +137,7 @@ def _card_text_checks(snapshot: HfRepoSnapshot) -> list[WarningItem]:
         return []
     return [
         WarningItem(
-            check_id="missing_card_text",
+            check_id="CARD_TEXT_MISSING",
             severity="warning",
             message="No README card text was available for prose checks.",
             evidence={},
@@ -155,7 +155,7 @@ def _model_checks(snapshot: HfRepoSnapshot) -> list[WarningItem]:
     if not base_model and not tag_base_model:
         warnings.append(
             WarningItem(
-                check_id="missing_base_model",
+                check_id="MODEL_BASE_MODEL_MISSING",
                 severity="warning",
                 message="No base model metadata was found.",
                 evidence={"base_model": base_model, "base_model_tags": tag_base_model},
@@ -165,7 +165,7 @@ def _model_checks(snapshot: HfRepoSnapshot) -> list[WarningItem]:
     if not _contains_any(text, INTENDED_USE_KEYWORDS):
         warnings.append(
             WarningItem(
-                check_id="missing_intended_use",
+                check_id="MODEL_INTENDED_USE_MISSING",
                 severity="warning",
                 message="Model card text does not clearly mention intended use.",
                 evidence={"keywords_checked": INTENDED_USE_KEYWORDS},
@@ -175,7 +175,7 @@ def _model_checks(snapshot: HfRepoSnapshot) -> list[WarningItem]:
     if not _contains_any(text, LIMITATION_KEYWORDS):
         warnings.append(
             WarningItem(
-                check_id="missing_limitations",
+                check_id="MODEL_LIMITATIONS_MISSING",
                 severity="warning",
                 message="Model card text does not clearly mention limitations.",
                 evidence={"keywords_checked": LIMITATION_KEYWORDS},
@@ -202,7 +202,7 @@ def _dataset_checks(snapshot: HfRepoSnapshot) -> list[WarningItem]:
     if not _contains_any(text, SOURCE_KEYWORDS):
         warnings.append(
             WarningItem(
-                check_id="missing_dataset_source_statement",
+                check_id="DATASET_SOURCE_MISSING",
                 severity="warning",
                 message="Dataset card text does not clearly mention source data or creation process.",
                 evidence={"keywords_checked": SOURCE_KEYWORDS},
@@ -214,7 +214,7 @@ def _dataset_checks(snapshot: HfRepoSnapshot) -> list[WarningItem]:
     if data_files is None and configs is None and snapshot.siblings_count in (None, 0):
         warnings.append(
             WarningItem(
-                check_id="missing_visible_data_file_surface",
+                check_id="DATASET_SPLIT_NOTES_MISSING",
                 severity="info",
                 message="No visible data file metadata was found in public card data snapshot.",
                 evidence={

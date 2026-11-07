@@ -58,17 +58,18 @@ def render_markdown(report: dict[str, Any]) -> str:
         "",
         "## Warnings",
         "",
-        "| Severity | Check | Message |",
-        "|---|---|---|",
     ]
     for item in report["warnings"]:
-        rows.append(
-            f"| {item['severity']} | {item['check_id']} | "
-            f"{_escape_table(item['message'])} |"
+        rows.extend(
+            [
+                f"### {item['check_id']} ({item['severity']})",
+                "",
+                item["message"],
+                "",
+            ]
         )
     rows.extend(
         [
-            "",
             "## Boundary",
             "",
             "This report does not provide legal advice, clinical validation, model ranking, "
@@ -116,7 +117,3 @@ def _snapshot_public_dict(result: AuditResult) -> dict[str, Any]:
 
 def _count(warnings: list[WarningItem], severity: str) -> int:
     return sum(1 for item in warnings if item.severity == severity)
-
-
-def _escape_table(value: str) -> str:
-    return value.replace("|", "\\|").replace("\n", " ")
