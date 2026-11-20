@@ -6,9 +6,11 @@ from pathlib import Path
 import yaml
 
 from .checks import run_checks
-from .hf_client import fetch_repo_snapshot
+from .hf_client import FetchError, fetch_repo_snapshot
 from .models import AuditResult
 from .reporting import write_report_bundle
+
+_VALID_REPO_TYPES = {"auto", "model", "dataset"}
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -44,7 +46,10 @@ def main(argv: list[str] | None = None) -> None:
     args = parser.parse_args(argv)
 
     if args.command == "audit":
-        result = _audit_one(args.repo_id, args.repo_type, args.source_url)
+        try:
+            result = _audit_one(args.repo_id, args.repo_type, args.source_url)
+        except (FetchError, ValueError) as exc:
+            raise SystemExit(f"Error: {exc}") from None
         write_report_bundle(result, Path(args.out_dir))
         return
 
@@ -61,16 +66,38 @@ def _audit_one(repo_id: str, repo_type: str, source_url: str | None) -> AuditRes
 
 
 def _audit_list(resources_path: Path, out_dir: Path) -> None:
-    payload = yaml.safe_load(resources_path.read_text(encoding="utf-8"))
-    resources = payload.get("resources", [])
-    if not resources:
-        raise SystemExit(f"No resources found in {resources_path}")
+    if not resources_path.is_file():
+        raise SystemExit(f"Error: resource file not found: {resources_path}")
 
-    for item in resources:
-        repo_id = item["repo_id"]
-        repo_type = item["repo_type"]
+    try:
+        payload = yaml.safe_load(resources_path.read_text(encoding="utf-8"))
+    except yaml.YAMLError as exc:
+        raise SystemExit(f"Error: invalid YAML in {resources_path}: {exc}") from None
+
+    if not isinstance(payload, dict):
+        raise SystemExit(f"Error: no resources found in {resources_path}")
+
+    resources = payload.get("resources")
+    if not isinstance(resources, list) or not resources:
+        raise SystemExit(f"Error: no resources found in {resources_path}")
+
+    for idx, item in enumerate(resources, start=1):
+        if not isinstance(item, dict):
+            raise SystemExit(f"Error: resource entry #{idx} in {resources_path} must be a mapping")
+        repo_id = item.get("repo_id")
+        repo_type = item.get("repo_type")
+        if not isinstance(repo_id, str) or not repo_id.strip():
+            raise SystemExit(f"Error: resource entry #{idx} in {resources_path} is missing repo_id")
+        if not isinstance(repo_type, str) or repo_type not in _VALID_REPO_TYPES:
+            raise SystemExit(
+                f"Error: resource entry #{idx} ({repo_id}) in {resources_path} has invalid "
+                f"repo_type {repo_type!r}; expected one of: auto, model, dataset"
+            )
         source_url = item.get("source_url")
-        result = _audit_one(repo_id=repo_id, repo_type=repo_type, source_url=source_url)
+        try:
+            result = _audit_one(repo_id=repo_id, repo_type=repo_type, source_url=source_url)
+        except (FetchError, ValueError) as exc:
+            raise SystemExit(f"Error: {exc}") from None
         repo_dir = out_dir / _safe_repo_dir(repo_id)
         write_report_bundle(result, repo_dir)
 

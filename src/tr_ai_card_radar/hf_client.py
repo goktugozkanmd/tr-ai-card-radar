@@ -73,7 +73,6 @@ def _download_readme(repo_id: str, repo_type: RepoType, token: str | None) -> st
                 repo_type=_hub_repo_type(repo_type),
                 token=token,
                 local_dir=tmpdir,
-                local_dir_use_symlinks=False,
             )
             return Path(path).read_text(encoding="utf-8", errors="replace")
     except Exception:

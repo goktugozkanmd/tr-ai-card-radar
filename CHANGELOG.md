@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Removed the deprecated `local_dir_use_symlinks` argument from `hf_hub_download` calls in `hf_client.py` to prevent runtime deprecation warnings and keep compatibility with newer `huggingface-hub` releases.
+- Replaced raw Python tracebacks in `tr-card-radar audit` and `tr-card-radar audit-list` with clear single-line errors when a resource YAML file is missing, empty, malformed, or a Hub snapshot cannot be fetched.
+- Added offline unit tests covering the CLI, Hugging Face client fallback logic, `examples/resources.yaml`, and `examples/local_cards/`.
 - Fixed package metadata URLs in pyproject.toml, which still pointed to a placeholder repository address (REPLACE_WITH_USERNAME) instead of the real repository.
 - Added a packaging metadata regression test that fails if the placeholder address comes back.
 - Fixed license prose scan matching short license ids as substrings, which hid the missing-license blocker on cards that merely contained words such as "submit" or "permit".
